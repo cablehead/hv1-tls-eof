@@ -23,7 +23,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     loop {
         let (stream, _) = listener.accept().await?;
 
-        let stream = accept_tls.accept(stream).await?;
+        let stream = match accept_tls.accept(stream).await {
+            Ok(s) => s,
+            Err(e) => {
+                eprintln!("Error accepting TLS connection: {:?}", e);
+                continue;
+            }
+        };
 
         let io = TokioIo::new(stream);
 
