@@ -1,5 +1,5 @@
 [package]
-name = "hv-tls-eof"
+name = "hv1-tls-eof"
 version = "0.1.0"
 edition = "2021"
 
